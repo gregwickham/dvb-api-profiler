@@ -4,7 +4,7 @@
 # Creative Commons Attribution-ShareAlike 4.0 International License.
 #
 
-PRG = dvb-pai-profiler
+PRG = dvb-api-profiler
 
 MAIN_OBJS = main.o profile.o adapter.o lib.o ofdm.o
 
