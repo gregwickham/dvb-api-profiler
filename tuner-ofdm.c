@@ -9,15 +9,13 @@
 #include    <sys/ioctl.h>
 
 #include    "profile.h"
-#include    "qpsk.h"
+#include    "tuner-ofdm.h"
 
-QPSK::QPSK( int index, int delay, int frequency, int sr, fe_sec_voltage_t pol ) : Adapter( index, delay ) {
+TunerOFDM::TunerOFDM( int index, int delay, int frequency ) : Adapter( index, delay ) {
     _frequency = frequency;
-    _sr = sr;
-    _pol = pol;
 }
 
-int QPSK::tune( void ) {
+int TunerOFDM::tune( void ) {
 
     int rv;
     
@@ -49,43 +47,32 @@ int QPSK::tune( void ) {
     dvb_properties.props = props;
     dvb_properties.num = 0; /* just to be sure */
 
-    props[ dvb_properties.num ].cmd = DTV_CLEAR;
-    props[ dvb_properties.num ].u.data = _frequency;
-    dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_DELIVERY_SYSTEM;
-    props[ dvb_properties.num ].u.data = SYS_DVBS;
-    dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_MODULATION;
-    props[ dvb_properties.num ].u.data = QPSK;
-    dvb_properties.num ++;
-
     props[ dvb_properties.num ].cmd = DTV_FREQUENCY;
     props[ dvb_properties.num ].u.data = _frequency;
     dvb_properties.num ++;
-
     props[ dvb_properties.num ].cmd = DTV_INVERSION;
     props[ dvb_properties.num ].u.data = INVERSION_AUTO;
     dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_INNER_FEC;
+    props[ dvb_properties.num ].cmd = DTV_MODULATION;
+    props[ dvb_properties.num ].u.data = QAM_AUTO;
+    dvb_properties.num ++;
+    props[ dvb_properties.num ].cmd = DTV_BANDWIDTH_HZ;
+    props[ dvb_properties.num ].u.data = BANDWIDTH_7_MHZ;
+    dvb_properties.num ++;
+    props[ dvb_properties.num ].cmd = DTV_CODE_RATE_HP;
     props[ dvb_properties.num ].u.data = FEC_AUTO;
     dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_SYMBOL_RATE;
-    props[ dvb_properties.num ].u.data = _sr;
+    props[ dvb_properties.num ].cmd = DTV_CODE_RATE_LP;
+    props[ dvb_properties.num ].u.data = FEC_AUTO;
     dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_VOLTAGE;
-    props[ dvb_properties.num ].u.data = _pol;
+    props[ dvb_properties.num ].cmd = DTV_GUARD_INTERVAL;
+    props[ dvb_properties.num ].u.data = GUARD_INTERVAL_AUTO;
     dvb_properties.num ++;
-
-    props[ dvb_properties.num ].cmd = DTV_TONE;
-    props[ dvb_properties.num ].u.data = 0;
+    props[ dvb_properties.num ].cmd = DTV_TRANSMISSION_MODE;
+    props[ dvb_properties.num ].u.data = TRANSMISSION_MODE_AUTO;
     dvb_properties.num ++;
-   
-    props[ dvb_properties.num ].cmd = DTV_TUNE;
+    props[ dvb_properties.num ].cmd = DTV_HIERARCHY;
+    props[ dvb_properties.num ].u.data = HIERARCHY_AUTO;
     dvb_properties.num ++;
    
     {

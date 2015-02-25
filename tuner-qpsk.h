@@ -1,5 +1,5 @@
-#ifndef _QPSK_H_
-#define _QPSK_H_
+#ifndef _TUNER_QPSK_H_
+#define _TUNER_QPSK_H_
 
 #include    <linux/dvb/frontend.h>
 
@@ -9,11 +9,11 @@
 
 #include    "adapter.h"
 
-class QPSK : public Adapter {
+class TunerQPSK : public Adapter {
 
     public:
      
-        QPSK( int index, int delay, int frequency, int sr, fe_sec_voltage_t pol );
+        TunerQPSK( int index, int delay, int frequency, int sr, fe_sec_voltage_t pol );
 
     protected:
         

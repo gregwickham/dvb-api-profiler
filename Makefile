@@ -6,7 +6,7 @@
 
 PRG = dvb-api-profiler
 
-MAIN_OBJS = main.o profile.o adapter.o lib.o ofdm.o qpsk.o
+MAIN_OBJS = main.o profile.o adapter.o lib.o tuner-ofdm.o tuner-qpsk.o
 
 OBJS = $(MAIN_OBJS)
 
