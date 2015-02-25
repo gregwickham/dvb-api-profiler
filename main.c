@@ -15,10 +15,14 @@ int main( int argc, char *argv[] ) {
 
     loop = Glib::MainLoop::create( false );
 
-    adapter[ 0 ] = new OFDM( 2, 1, 226500000 );
-    adapter[ 1 ] = new OFDM( 3, 4, 177500000 );
+    [greg@test00 streamer-v9]$ Info:  Tune:  Tuning DVB-S to Freq: 1062000 kHz, LO frequency 10700000 kHz Pol:H Srate=27800000, LNB number: 0^M
+
+    adapter[ 0 ] = new QPSK( 0, 1, 1062000, 27800000, SEC_VOLTAGE_18 );
+    adapter[ 1 ] = new QPSK( 1, 1, 1062000, 27800000, SEC_VOLTAGE_18 );
+#if 0
     adapter[ 3 ] = new OFDM( 4, 7, 219500000 );
     adapter[ 2 ] = new OFDM( 5, 10, 557625000 );
+#endif
 
     loop->run();
 
