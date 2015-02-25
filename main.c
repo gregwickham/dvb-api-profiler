@@ -15,8 +15,6 @@ int main( int argc, char *argv[] ) {
 
     loop = Glib::MainLoop::create( false );
 
-    [greg@test00 streamer-v9]$ Info:  Tune:  Tuning DVB-S to Freq: 1062000 kHz, LO frequency 10700000 kHz Pol:H Srate=27800000, LNB number: 0^M
-
     adapter[ 0 ] = new QPSK( 0, 1, 1062000, 27800000, SEC_VOLTAGE_18 );
     adapter[ 1 ] = new QPSK( 1, 1, 1062000, 27800000, SEC_VOLTAGE_18 );
 #if 0
