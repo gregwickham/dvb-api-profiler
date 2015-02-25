@@ -5,6 +5,7 @@
 #include    <glibmm.h>
 
 #include    "ofdm.h"
+#include    "qpsk.h"
 
 static Glib::RefPtr<Glib::MainLoop> loop;
 
